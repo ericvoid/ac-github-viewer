@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GitHub Viewer</string>
+    <string name="title_activity_user_profile">User Name</string>
+</resources>
