@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:text="UserName"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
@@ -24,7 +23,8 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
-        app:layout_constraintVertical_bias="0.504" />
+        app:layout_constraintVertical_bias="0.504"
+        android:hint="@string/searchPlaceholder"/>
 
     <Button
         android:id="@+id/searchButton"
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Search"
+        android:text="@string/searchButtonLabel"
         app:layout_constraintTop_toBottomOf="@+id/searchEditText"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -1,19 +1,17 @@
 package com.ericvoid.githubprofileviewer;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.ericvoid.githubprofileviewer.githubapi.GithubApi;
 import com.ericvoid.githubprofileviewer.githubapi.GithubApiInterface;
-import com.ericvoid.githubprofileviewer.githubapi.model.Repository;
 import com.ericvoid.githubprofileviewer.githubapi.model.UserProfile;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,20 +51,30 @@ public class MainActivity extends AppCompatActivity {
             searchButton.setEnabled(true);
 
             if (response.code() == 200) {
-                // todo: forward userprofile data
                 Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
                 intent.putExtra("UserProfile", response.body());
                 startActivity(intent);
 
             } else {
-                // todo: show alert
+                showErrorAlert(R.string.user_not_found_message);
             }
         }
 
         @Override
         public void onFailure(Call<UserProfile> call, Throwable t) {
-            searchButton.setEnabled(true);
-            // todo: show alert
+            showErrorAlert(R.string.network_error_message);
         }
     };
+
+    private void showErrorAlert(int messageId) {
+        new AlertDialog.Builder(this)
+            .setMessage(messageId)
+            .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    searchButton.setEnabled(true);
+                }
+            })
+            .show();
+    }
+
 }

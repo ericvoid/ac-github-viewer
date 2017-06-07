@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">GitHub Viewer</string>
     <string name="title_activity_user_profile">User Name</string>
+    <string name="user_not_found_message">User not found. Please try another name.</string>
+    <string name="network_error_message">There was a network error. Check your internet connection and try again later.</string>
+    <string name="searchPlaceholder">Username</string>
+    <string name="searchButtonLabel">Search</string>
 </resources>
