@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -13,12 +15,14 @@ import com.ericvoid.githubprofileviewer.githubapi.GithubApi;
 import com.ericvoid.githubprofileviewer.githubapi.GithubApiInterface;
 import com.ericvoid.githubprofileviewer.githubapi.model.Repository;
 import com.ericvoid.githubprofileviewer.githubapi.model.UserProfile;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,7 +33,8 @@ public class UserProfileActivity extends AppCompatActivity {
 
     UserProfile userProfile;
 
-    ListView repositoriesListView;
+    RecyclerView repositoriesRecyclerView;
+    LinearLayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +44,13 @@ public class UserProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        repositoriesListView = (ListView) findViewById(R.id.reposListView);
+        repositoriesRecyclerView = (RecyclerView) findViewById(R.id.repos_recycler_view);
+        repositoriesRecyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        repositoriesRecyclerView.setLayoutManager(layoutManager);
 
         userProfile = (UserProfile) getIntent().getExtras().get("UserProfile");
         githubApi = GithubApi.create();
@@ -59,6 +69,8 @@ public class UserProfileActivity extends AppCompatActivity {
             toobar.setTitle(userProfile.login);
         }
 
+        CircleImageView imageView = (CircleImageView) findViewById(R.id.profile_image);
+        Picasso.with(this).load(userProfile.avatarUrl).into(imageView);
     }
 
     private void fetchRepositories(){
@@ -100,7 +112,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 new String[] {"name", "language"},
                 new int[] { android.R.id.text1, android.R.id.text2 });
 
-        repositoriesListView.setAdapter(adapter);
+        // repositoriesRecyclerView.setAdapter(adapter);
     }
 
 

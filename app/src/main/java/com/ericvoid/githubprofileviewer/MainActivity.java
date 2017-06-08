@@ -55,8 +55,11 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("UserProfile", response.body());
                 startActivity(intent);
 
-            } else {
+            } else if (response.code() == 404) {
                 showErrorAlert(R.string.user_not_found_message);
+
+            } else {
+                showErrorAlert(R.string.network_error_message);
             }
         }
 
