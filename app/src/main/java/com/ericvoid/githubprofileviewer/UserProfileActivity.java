@@ -51,7 +51,14 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private void displayUserProfileInfo() {
         CollapsingToolbarLayout toobar = (CollapsingToolbarLayout)findViewById(R.id.toolbar_layout);
-        toobar.setTitle(userProfile.login);
+
+        if (userProfile.name != null) {
+            toobar.setTitle(userProfile.name);
+
+        } else {
+            toobar.setTitle(userProfile.login);
+        }
+
     }
 
     private void fetchRepositories(){
