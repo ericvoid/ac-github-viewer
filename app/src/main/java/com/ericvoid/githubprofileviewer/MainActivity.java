@@ -2,12 +2,17 @@ package com.ericvoid.githubprofileviewer;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ericvoid.githubprofileviewer.githubapi.GithubApi;
 import com.ericvoid.githubprofileviewer.githubapi.GithubApiInterface;
@@ -28,10 +33,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setTitle(R.string.app_name);
+
         searchButton = (Button)findViewById(R.id.searchButton);
         searchButton.setOnClickListener(searchClickCallback);
 
         githubApi = GithubApi.create();
+    }
+
+    @Override
+    public void setTitle(int resId) {
+        super.setTitle(resId);
+
+        TextView textView = new TextView(this);
+        textView.setText(resId);
+        textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);
+
+        if (Build.VERSION.SDK_INT < 23) {
+            textView.setTextAppearance(this, R.style.TextAppearance_AppCompat_Large_Inverse);
+        } else {
+            textView.setTextAppearance(R.style.TextAppearance_AppCompat_Large_Inverse);
+        }
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setCustomView(textView);
     }
 
     View.OnClickListener searchClickCallback = new View.OnClickListener() {
