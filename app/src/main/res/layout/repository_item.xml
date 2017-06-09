@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="16dp">
 
     <TextView android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Test"
-        style="@style/Base.TextAppearance.AppCompat.Headline"/>
+        android:text="Ruby on Rails"
+        style="@style/Repository.Body2"/>
 
     <TextView android:id="@+id/language"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Java"
-        style="@style/Base.TextAppearance.AppCompat.Medium"/>
+        android:text="Ruby"
+        style="@style/Repository.Body1"/>
 </LinearLayout>

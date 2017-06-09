@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -49,17 +50,25 @@ public class UserProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        repositoriesRecyclerView = (RecyclerView) findViewById(R.id.repos_recycler_view);
-        repositoriesRecyclerView.setHasFixedSize(true);
-
-        layoutManager = new LinearLayoutManager(this);
-        repositoriesRecyclerView.setLayoutManager(layoutManager);
+        setupRecyclerView();
 
         userProfile = (UserProfile) getIntent().getExtras().get("UserProfile");
         githubApi = GithubApi.create();
 
         displayUserProfileInfo();
         fetchRepositories();
+    }
+
+    private void setupRecyclerView() {
+        repositoriesRecyclerView = (RecyclerView) findViewById(R.id.repos_recycler_view);
+        repositoriesRecyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        repositoriesRecyclerView.setLayoutManager(layoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(repositoriesRecyclerView.getContext(),
+                layoutManager.getOrientation());
+        repositoriesRecyclerView.addItemDecoration(dividerItemDecoration);
     }
 
     private void displayUserProfileInfo() {
