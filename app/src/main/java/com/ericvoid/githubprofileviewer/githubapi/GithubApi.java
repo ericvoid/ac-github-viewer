@@ -1,6 +1,5 @@
 package com.ericvoid.githubprofileviewer.githubapi;
 
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

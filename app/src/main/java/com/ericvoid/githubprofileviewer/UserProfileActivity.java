@@ -1,6 +1,5 @@
 package com.ericvoid.githubprofileviewer;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AlertDialog;
@@ -9,8 +8,6 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import com.ericvoid.githubprofileviewer.adapters.RepositoriesListAdapter;
 import com.ericvoid.githubprofileviewer.githubapi.GithubApi;
@@ -19,10 +16,7 @@ import com.ericvoid.githubprofileviewer.githubapi.model.Repository;
 import com.ericvoid.githubprofileviewer.githubapi.model.UserProfile;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
