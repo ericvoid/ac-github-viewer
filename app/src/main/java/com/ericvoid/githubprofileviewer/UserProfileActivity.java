@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.ericvoid.githubprofileviewer.adapters.RepositoriesListAdapter;
 import com.ericvoid.githubprofileviewer.githubapi.GithubApi;
 import com.ericvoid.githubprofileviewer.githubapi.GithubApiInterface;
 import com.ericvoid.githubprofileviewer.githubapi.model.Repository;
@@ -35,6 +36,8 @@ public class UserProfileActivity extends AppCompatActivity {
 
     RecyclerView repositoriesRecyclerView;
     LinearLayoutManager layoutManager;
+
+    RepositoriesListAdapter repositoriesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,22 +100,11 @@ public class UserProfileActivity extends AppCompatActivity {
     };
 
     private void displayRepositories(List<Repository> body) {
-        List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+        Repository[] data = new Repository[body.size()];
+        body.toArray(data);
 
-        for (Repository r : body) {
-            Map<String, String> entry = new HashMap<String, String>();
-            entry.put("name", r.name);
-            entry.put("language", r.language);
-
-            data.add(entry);
-        }
-
-        SimpleAdapter adapter = new SimpleAdapter(this, data,
-                android.R.layout.simple_list_item_2,
-                new String[] {"name", "language"},
-                new int[] { android.R.id.text1, android.R.id.text2 });
-
-        // repositoriesRecyclerView.setAdapter(adapter);
+        repositoriesAdapter = new RepositoriesListAdapter(data);
+        repositoriesRecyclerView.setAdapter(repositoriesAdapter);
     }
 
 
